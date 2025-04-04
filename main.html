@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Are You Gay or Not?</title>
+    <style>
+        body {
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background-color: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: brightness(1.2);
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(20, 20, 20, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid #444;
+            transition: transform 0.3s;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(8px);
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .buttons {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: absolute;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            outline: none;
+            white-space: nowrap;
+        }
+
+        #yesBtn {
+            background: linear-gradient(145deg, #4CAF50, #388E3C);
+            color: white;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        #yesBtn:hover, #yesBtn:focus {
+            background: linear-gradient(145deg, #388E3C, #2E7D32);
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        #noBtn {
+            background: linear-gradient(145deg, #f44336, #d32f2f);
+            color: white;
+            z-index: 5;
+        }
+
+        #noBtn:hover {
+            background: linear-gradient(145deg, #d32f2f, #b71c1c);
+            box-shadow: 0 8px 20px rgba(244, 67, 54, 0.4);
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes rainbow {
+            0% { background-color: #ff0000; }
+            14% { background-color: #ff7f00; }
+            28% { background-color: #ffff00; }
+            42% { background-color: #00ff00; }
+            57% { background-color: #0000ff; }
+            71% { background-color: #4b0082; }
+            85% { background-color: #9400d3; }
+            100% { background-color: #ff0000; }
+        }
+
+        .rainbow-mode {
+            animation: rainbow 5s linear infinite;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            top: -10px;
+            z-index: 9999;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.4rem;
+                margin-bottom: 20px;
+            }
+            
+            .buttons {
+                height: 180px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            h1 {
+                font-size: 1.2rem;
+            }
+            
+            .buttons {
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kya aap gulam hn?</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="playyesAudio()" class="btn">YES</button>
+            <button id="noBtn" onclick="playAudio()" class="btn">NO</button>
+        </div>
+
+    </div>
+
+    <audio id="myAudio">
+        <source id="audioSource" src="recording/are.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+
+    
+
+        
+    <script>
+ 
+
+ var audioElement = document.getElementById("myAudio");
+var sourceElement = document.getElementById("audioSource");
+
+var audioFiles = [
+        "recording/na chotu na no p hath na mare tu.mp3",
+        "recording/hath no p mat mare.mp3",
+        "recording/are.mp3",
+        "recording/bhaichara apna le.mp3",
+        "recording/dekhle phir.mp3",
+        "recording/yes ka button kyu h.mp3",
+        "recording/koi fayada na h.mp3",
+        "recording/tu chakka.mp3",
+        "recording/tu bhi pakko hi dekhe h.mp3",
+        "recording/time h.mp3",
+        "recording/man ja mna ja.mp3",
+        "recording/phir no.mp3",
+        "recording/kubool karle.mp3",
+        "recording/dekh manni to padegi.mp3",
+        "recording/are man ja bhai.mp3",
+    ];
+
+    var audioyesFiles = [
+        "recording/sada gulami hi karoge gulam.mp3",
+        "recording/certificate gulami ko.mp3",
+        "recording/thik h yr.mp3",
+    ];
+
+ 
+
+
+
+    var currentIndex = 0;
+
+    function playAudio() {
+        // Change to next audio file
+        sourceElement.src = audioFiles[currentIndex]; // Set new source
+        
+        // Reload and play new audio
+        audioElement.load();
+        audioElement.play();
+        
+        currentIndex = (currentIndex + 1) % audioFiles.length;
+    }
+
+    var yesindex = 0;
+    function playyesAudio(){
+        sourceElement.src = audioyesFiles[yesindex]; // Set new source
+        
+        // Reload and play new audio
+        audioElement.load();
+        audioElement.play();
+        
+        yesindex = (yesindex + 1) % audioyesFiles.length;
+
+    }
+
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create background bubbles
+            function createBubbles() {
+                const bubbleCount = window.innerWidth < 480 ? 60 : 120;
+                const colors = [
+                    'rgba(255, 255, 255, 0.15)',
+                    'rgba(255, 255, 255, 0.12)',
+                    'rgba(255, 255, 255, 0.10)',
+                    'rgba(200, 230, 255, 0.15)',
+                    'rgba(255, 200, 230, 0.15)'
+                ];
+                
+                for (let i = 0; i < bubbleCount; i++) {
+                    const bubble = document.createElement('div');
+                    bubble.classList.add('bubble');
+                    
+                    const size = Math.random() * 12 + 8;
+                    bubble.style.width = `${size}px`;
+                    bubble.style.height = `${size}px`;
+                    
+                    bubble.style.left = `${Math.random() * 100}vw`;
+                    bubble.style.top = `${Math.random() * 100}vh`;
+                    bubble.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    bubble.style.boxShadow = `0 0 ${size/2}px ${size/3}px rgba(255, 255, 255, 0.1)`;
+                    
+                    document.body.appendChild(bubble);
+                    
+                    animateBubble(bubble);
+                }
+            }
+            
+            function animateBubble(bubble) {
+                const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
+                let x = startX;
+                let y = startY;
+                
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 0.1 + 0.05;
+                const xSpeed = Math.cos(angle) * speed;
+                const ySpeed = Math.sin(angle) * speed;
+                
+                const curveFactor = Math.random() * 0.02 + 0.01;
+                let curveTime = 0;
+                
+                function moveBubble() {
+                    curveTime += 0.01;
+                    x += xSpeed + Math.sin(curveTime) * curveFactor;
+                    y += ySpeed + Math.cos(curveTime) * curveFactor;
+                    
+                    if (x > 100) x = 0;
+                    if (x < 0) x = 100;
+                    if (y > 100) y = 0;
+                    if (y < 0) y = 100;
+                    
+                    bubble.style.left = `${x}vw`;
+                    bubble.style.top = `${y}vh`;
+                    
+                    const scale = 0.9 + Math.sin(Date.now() * 0.001) * 0.15;
+                    bubble.style.transform = `scale(${scale})`;
+                    
+                    requestAnimationFrame(moveBubble);
+                }
+                
+                moveBubble();
+            }
+
+            createBubbles();
+            
+            const noBtn = document.getElementById('noBtn');
+            const yesBtn = document.getElementById('yesBtn');
+            const buttonsContainer = document.querySelector('.buttons');
+            const body = document.body;
+            let lastPosition = null;
+            let clickCount = 0;
+            const maxClickCount = 5;
+            
+            function positionNoButton(initial = false) {
+                const containerRect = buttonsContainer.getBoundingClientRect();
+                const yesRect = yesBtn.getBoundingClientRect();
+                const noRect = noBtn.getBoundingClientRect();
+                
+                const containerWidth = containerRect.width - noRect.width;
+                const containerHeight = containerRect.height - noRect.height;
+                
+                const quadrants = [
+                    { xMin: 0, xMax: containerWidth/2, yMin: 0, yMax: containerHeight/2 },
+                    { xMin: containerWidth/2, xMax: containerWidth, yMin: 0, yMax: containerHeight/2 },
+                    { xMin: 0, xMax: containerWidth/2, yMin: containerHeight/2, yMax: containerHeight },
+                    { xMin: containerWidth/2, xMax: containerWidth, yMin: containerHeight/2, yMax: containerHeight }
+                ];
+                
+                let targetQuadrant;
+                if (!initial && lastPosition) {
+                    const lastQuadrant = getQuadrant(lastPosition.x, lastPosition.y, containerWidth, containerHeight);
+                    targetQuadrant = quadrants[(lastQuadrant + 1 + Math.floor(Math.random() * 3)) % 4];
+                } else {
+                    targetQuadrant = quadrants[Math.floor(Math.random() * 4)];
+                }
+                
+                let bestPosition = { x: 0, y: 0 };
+                let maxDistance = 0;
+                
+                for (let i = 0; i < 5; i++) {
+                    const x = targetQuadrant.xMin + Math.random() * (targetQuadrant.xMax - targetQuadrant.xMin);
+                    const y = targetQuadrant.yMin + Math.random() * (targetQuadrant.yMax - targetQuadrant.yMin);
+                    
+                    const distance = Math.sqrt(
+                        Math.pow(x - (yesRect.left - containerRect.left + yesBtn.offsetWidth/2), 2) + 
+                        Math.pow(y - (yesRect.top - containerRect.top + yesBtn.offsetHeight/2), 2)
+                    );
+                    
+                    if (distance > maxDistance) {
+                        maxDistance = distance;
+                        bestPosition = { x, y };
+                    }
+                }
+                
+                noBtn.style.left = bestPosition.x + 'px';
+                noBtn.style.top = bestPosition.y + 'px';
+                lastPosition = bestPosition;
+                
+                noBtn.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                setTimeout(() => {
+                    noBtn.style.transition = 'none';
+                }, 300);
+            }
+            
+            function getQuadrant(x, y, width, height) {
+                if (x < width/2) {
+                    return y < height/2 ? 0 : 2;
+                } else {
+                    return y < height/2 ? 1 : 3;
+                }
+            }
+            
+            noBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+                positionNoButton();
+            });
+            
+            noBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                positionNoButton();
+                createParticles(e.clientX, e.clientY);
+                
+                noBtn.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    noBtn.style.pointerEvents = 'auto';
+                }, 300);
+            });
+            
+            // yesBtn.addEventListener('click', function() {
+            //     createConfetti();
+            //     body.classList.add('rainbow-mode');
+                
+            //     const messages = [
+            //         "I knew it! 😜",
+            //         "Called it! 🌈",
+            //         "Pride! 🏳️‍🌈",
+            //         "YAAAS QUEEN! 👑",
+            //         "GAY ICON! 💅"
+            //     ];
+            //     const messageIndex = Math.min(clickCount, messages.length - 1);
+            //     alert(messages[messageIndex]);
+                
+            //     clickCount++;
+            //     if (clickCount >= maxClickCount) {
+            //         setTimeout(() => {
+            //             alert("Okay we get it, you're SUPER gay! 🎉");
+            //         }, 500);
+            //     }
+                
+            //     setTimeout(() => {
+            //         body.classList.remove('rainbow-mode');
+            //     }, 5000);
+            // });
+            
+            function createParticles(x, y) {
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+                
+                for (let i = 0; i < 15; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    const size = Math.random() * 10 + 5;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+                    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    document.body.appendChild(particle);
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const velocity = Math.random() * 5 + 2;
+                    const lifetime = Math.random() * 1000 + 500;
+                    
+                    const startTime = Date.now();
+                    
+                    function animateParticle() {
+                        const elapsed = Date.now() - startTime;
+                        const progress = elapsed / lifetime;
+                        
+                        if (progress >= 1) {
+                            document.body.removeChild(particle);
+                            return;
+                        }
+                        
+                        const currentX = x + Math.cos(angle) * velocity * elapsed * 0.1;
+                        const currentY = y + Math.sin(angle) * velocity * elapsed * 0.1;
+                        
+                        particle.style.left = `${currentX}px`;
+                        particle.style.top = `${currentY}px`;
+                        particle.style.opacity = 1 - progress;
+                        
+                        requestAnimationFrame(animateParticle);
+                    }
+                    
+                    requestAnimationFrame(animateParticle);
+                }
+            }
+            
+            function createConfetti() {
+                const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'];
+                
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    
+                    const size = Math.random() * 10 + 5;
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    
+                    confetti.style.left = `${Math.random() * window.innerWidth}px`;
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    if (Math.random() > 0.5) {
+                        confetti.style.borderRadius = '50%';
+                    } else {
+                        confetti.style.borderRadius = '0';
+                    }
+                    
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    
+                    document.body.appendChild(confetti);
+                    
+                    const animationDuration = Math.random() * 3000 + 2000;
+                    
+                    confetti.style.animation = `fall ${animationDuration}ms linear forwards`;
+                    
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+                        @keyframes fall {
+                            to {
+                                transform: translateY(${window.innerHeight + 10}px) rotate(${Math.random() * 360}deg);
+                                opacity: 0;
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    
+                    setTimeout(() => {
+                        if (confetti.parentNode) {
+                            document.body.removeChild(confetti);
+                        }
+                    }, animationDuration);
+                }
+            }
+            
+            window.addEventListener('resize', function() {
+                positionNoButton(true);
+                document.querySelectorAll('.bubble').forEach(b => b.remove());
+                createBubbles();
+            });
+            
+            noBtn.addEventListener('mousedown', function() {
+                buttonsContainer.style.transform = 'rotate(1deg)';
+            });
+            
+            noBtn.addEventListener('mouseup', function() {
+                buttonsContainer.style.transform = 'rotate(-1deg)';
+                setTimeout(() => {
+                    buttonsContainer.style.transform = 'rotate(0deg)';
+                }, 100);
+            });
+            
+            positionNoButton(true);
+        });
+    </script>
+</body>
+</html>
