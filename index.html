@@ -140,6 +140,7 @@
         @media (max-width: 480px) {
             .container {
                 padding: 20px;
+                margin-top: -40px;
             }
             
             h1 {
@@ -210,11 +211,6 @@ var sourceElement = document.getElementById("audioSource");
 //         "recording/are man ja bhai.mp3",
 //     ];
 
-    var audioFiles = [
-        "recording/sada gulami hi karoge gulam.mp3",
-        "recording/certificate gulami ko.mp3",
-        "recording/thik h yr.mp3",
-    ];
     var audioyesFiles = [
         "recording/sada gulami hi karoge gulam.mp3",
         "recording/certificate gulami ko.mp3",
@@ -225,18 +221,18 @@ var sourceElement = document.getElementById("audioSource");
 
 
 
-    var currentIndex = 0;
+    // var currentIndex = 0;
 
-    function playAudio() {
-        // Change to next audio file
-        sourceElement.src = audioFiles[currentIndex]; // Set new source
+    // function playAudio() {
+    //     // Change to next audio file
+    //     sourceElement.src = audioFiles[currentIndex]; // Set new source
         
-        // Reload and play new audio
-        audioElement.load();
-        audioElement.play();
+    //     // Reload and play new audio
+    //     audioElement.load();
+    //     audioElement.play();
         
-        currentIndex = (currentIndex + 1) % audioFiles.length;
-    }
+    //     currentIndex = (currentIndex + 1) % audioFiles.length;
+    // }
 
     var yesindex = 0;
     function playyesAudio(){
@@ -375,9 +371,9 @@ var sourceElement = document.getElementById("audioSource");
                 lastPosition = bestPosition;
                 
                 noBtn.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                setTimeout(() => {
-                    noBtn.style.transition = 'none';
-                }, 300);
+                // setTimeout(() => {
+                //     noBtn.style.transition = 'none';
+                // }, 300);
             }
             
             function getQuadrant(x, y, width, height) {
@@ -393,10 +389,53 @@ var sourceElement = document.getElementById("audioSource");
                 positionNoButton();
             });
             
+            let currentIndex = 0;
+
             noBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 positionNoButton();
+
+
+
+                var audioElement = document.getElementById("myAudio");
+                var sourceElement = document.getElementById("audioSource");
+                var audioFiles = [
+                        "recording/na chotu na no p hath na mare tu.mp3",
+                        "recording/hath no p mat mare.mp3",
+                        "recording/are.mp3",
+                        "recording/bhaichara apna le.mp3",
+                        "recording/dekhle phir.mp3",
+                        "recording/yes ka button kyu h.mp3",
+                        "recording/koi fayada na h.mp3",
+                        "recording/tu chakka.mp3",
+                        "recording/tu bhi pakko hi dekhe h.mp3",
+                        "recording/time h.mp3",
+                        "recording/man ja mna ja.mp3",
+                        "recording/phir no.mp3",
+                        "recording/kubool karle.mp3",
+                        "recording/dekh manni to padegi.mp3",
+                        "recording/are man ja bhai.mp3",
+                    ];
+                    
+
+                function playAudio() {
+                // Change to next audio file
+                sourceElement.src = audioFiles[currentIndex]; // Set new source
+                
+                // Reload and play new audio
+                audioElement.load();
+                audioElement.play();
+                console.log(currentIndex +1 % audioFiles.length)
+                currentIndex = (currentIndex + 1) % audioFiles.length;
+               }
+
+               playAudio()
+
+
+
+
+
                 createParticles(e.clientX, e.clientY);
                 
                 noBtn.style.pointerEvents = 'none';
@@ -405,31 +444,15 @@ var sourceElement = document.getElementById("audioSource");
                 }, 300);
             });
             
-            // yesBtn.addEventListener('click', function() {
-            //     createConfetti();
-            //     body.classList.add('rainbow-mode');
+            yesBtn.addEventListener('click', function() {
+                createConfetti();
+                body.classList.add('rainbow-mode');
                 
-            //     const messages = [
-            //         "I knew it! 😜",
-            //         "Called it! 🌈",
-            //         "Pride! 🏳️‍🌈",
-            //         "YAAAS QUEEN! 👑",
-            //         "GAY ICON! 💅"
-            //     ];
-            //     const messageIndex = Math.min(clickCount, messages.length - 1);
-            //     alert(messages[messageIndex]);
                 
-            //     clickCount++;
-            //     if (clickCount >= maxClickCount) {
-            //         setTimeout(() => {
-            //             alert("Okay we get it, you're SUPER gay! 🎉");
-            //         }, 500);
-            //     }
-                
-            //     setTimeout(() => {
-            //         body.classList.remove('rainbow-mode');
-            //     }, 5000);
-            // });
+                setTimeout(() => {
+                    body.classList.remove('rainbow-mode');
+                }, 5000);
+            });
             
             function createParticles(x, y) {
                 const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
