@@ -174,7 +174,7 @@
         <h1>Kya aap gulam hn?</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="playyesAudio()" class="btn">YES</button>
-            <button id="noBtn"  onclick="playAudio()"  class="btn">NO</button>
+            <button id="noBtn" class="btn">NO</button>
         </div>
 
     </div>
@@ -193,23 +193,23 @@
  var audioElement = document.getElementById("myAudio");
 var sourceElement = document.getElementById("audioSource");
 
-var audioFiles = [
-        "recording/na chotu na no p hath na mare tu.mp3",
-        "recording/hath no p mat mare.mp3",
-        "recording/are.mp3",
-        "recording/bhaichara apna le.mp3",
-        "recording/dekhle phir.mp3",
-        "recording/yes ka button kyu h.mp3",
-        "recording/koi fayada na h.mp3",
-        "recording/tu chakka.mp3",
-        "recording/tu bhi pakko hi dekhe h.mp3",
-        "recording/time h.mp3",
-        "recording/man ja mna ja.mp3",
-        "recording/phir no.mp3",
-        "recording/kubool karle.mp3",
-        "recording/dekh manni to padegi.mp3",
-        "recording/are man ja bhai.mp3",
-    ];
+// var audioFiles = [
+//         "recording/na chotu na no p hath na mare tu.mp3",
+//         "recording/hath no p mat mare.mp3",
+//         "recording/are.mp3",
+//         "recording/bhaichara apna le.mp3",
+//         "recording/dekhle phir.mp3",
+//         "recording/yes ka button kyu h.mp3",
+//         "recording/koi fayada na h.mp3",
+//         "recording/tu chakka.mp3",
+//         "recording/tu bhi pakko hi dekhe h.mp3",
+//         "recording/time h.mp3",
+//         "recording/man ja mna ja.mp3",
+//         "recording/phir no.mp3",
+//         "recording/kubool karle.mp3",
+//         "recording/dekh manni to padegi.mp3",
+//         "recording/are man ja bhai.mp3",
+//     ];
 
     var audioyesFiles = [
         "recording/sada gulami hi karoge gulam.mp3",
@@ -221,18 +221,18 @@ var audioFiles = [
 
 
 
-    var currentIndex = 0;
+    // var currentIndex = 0;
 
-    function playAudio() {
-        // Change to next audio file
-        sourceElement.src = audioFiles[currentIndex]; // Set new source
+    // function playAudio() {
+    //     // Change to next audio file
+    //     sourceElement.src = audioFiles[currentIndex]; // Set new source
         
-        // Reload and play new audio
-        audioElement.load();
-        audioElement.play();
+    //     // Reload and play new audio
+    //     audioElement.load();
+    //     audioElement.play();
         
-        currentIndex = (currentIndex + 1) % audioFiles.length;
-    }
+    //     currentIndex = (currentIndex + 1) % audioFiles.length;
+    // }
 
     var yesindex = 0;
     function playyesAudio(){
@@ -324,6 +324,43 @@ var audioFiles = [
             let lastPosition = null;
             let clickCount = 0;
             const maxClickCount = 5;
+
+
+
+            var audioElement = document.getElementById("myAudio");
+            var sourceElement = document.getElementById("audioSource");
+
+            var audioFiles = [
+                    "recording/na chotu na no p hath na mare tu.mp3",
+                    "recording/hath no p mat mare.mp3",
+                    "recording/are.mp3",
+                    "recording/bhaichara apna le.mp3",
+                    "recording/dekhle phir.mp3",
+                    "recording/yes ka button kyu h.mp3",
+                    "recording/koi fayada na h.mp3",
+                    "recording/tu chakka.mp3",
+                    "recording/tu bhi pakko hi dekhe h.mp3",
+                    "recording/time h.mp3",
+                    "recording/man ja mna ja.mp3",
+                    "recording/phir no.mp3",
+                    "recording/kubool karle.mp3",
+                    "recording/dekh manni to padegi.mp3",
+                    "recording/are man ja bhai.mp3",
+                ];          
+
+
+
+                var currentIndex = 0;
+
+                function playAudio() {
+                    sourceElement.src = audioFiles[currentIndex]; 
+                    
+                    audioElement.load();
+                    audioElement.play();
+                    
+                    currentIndex = (currentIndex + 1) % audioFiles.length;
+                }
+
             
             function positionNoButton(initial = false) {
                 const containerRect = buttonsContainer.getBoundingClientRect();
@@ -387,59 +424,23 @@ var audioFiles = [
             noBtn.addEventListener('touchstart', function(e) {
                 e.preventDefault();
                 positionNoButton();
+                playAudio();
             });
             
-            // let currentIndex = 0;
 
-            // noBtn.addEventListener('click', function(e) {
-            //     e.preventDefault();
-            //     e.stopPropagation();
-            //     positionNoButton();
+            noBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                positionNoButton();
+                playAudio();          
 
-
-
-            //     // var audioElement = document.getElementById("myAudio");
-            //     // var sourceElement = document.getElementById("audioSource");
-            //     // var audioFiles = [
-            //     //         "recording/na chotu na no p hath na mare tu.mp3",
-            //     //         "recording/hath no p mat mare.mp3",
-            //     //         "recording/are.mp3",
-            //     //         "recording/bhaichara apna le.mp3",
-            //     //         "recording/dekhle phir.mp3",
-            //     //         "recording/yes ka button kyu h.mp3",
-            //     //         "recording/koi fayada na h.mp3",
-            //     //         "recording/tu chakka.mp3",
-            //     //         "recording/tu bhi pakko hi dekhe h.mp3",
-            //     //         "recording/time h.mp3",
-            //     //         "recording/man ja mna ja.mp3",
-            //     //         "recording/phir no.mp3",
-            //     //         "recording/kubool karle.mp3",
-            //     //         "recording/dekh manni to padegi.mp3",
-            //     //         "recording/are man ja bhai.mp3",
-            //     //     ];
-                    
-
-            //     // // Change to next audio file
-            //     // sourceElement.src = audioFiles[currentIndex]; // Set new source
+                createParticles(e.clientX, e.clientY);
                 
-            //     // // Reload and play new audio
-            //     // audioElement.load();
-            //     // audioElement.play();
-            //     // console.log(currentIndex +1 % audioFiles.length)
-            //     // currentIndex = (currentIndex + 1) % audioFiles.length;
-               
-
-
-
-
-
-            //     createParticles(e.clientX, e.clientY);
-                
-            //     noBtn.style.pointerEvents = 'none';
-            //     setTimeout(() => {
-            //         noBtn.style.pointerEvents = 'auto';
-            //     }, 300);
-            // });
+                noBtn.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    noBtn.style.pointerEvents = 'auto';
+                }, 300);
+            });
             
             yesBtn.addEventListener('click', function() {
                 createConfetti();
