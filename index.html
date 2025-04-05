@@ -172,7 +172,7 @@
 <body>
     <div class="container">
         <h1>Kya aap gulam hn?</h1>
-        <div class="buttons">
+        <div class="buttons" preload="auto">
             <button id="yesBtn" onclick="playyesAudio()" class="btn">YES</button>
             <button id="noBtn" class="btn">NO</button>
         </div>
@@ -331,36 +331,49 @@ var sourceElement = document.getElementById("audioSource");
             var sourceElement = document.getElementById("audioSource");
 
             var audioFiles = [
-                    "recording/na chotu na no p hath na mare tu.mp3",
-                    "recording/hath no p mat mare.mp3",
-                    "recording/are.mp3",
-                    "recording/bhaichara apna le.mp3",
-                    "recording/dekhle phir.mp3",
+                  "recording/phir no.mp3",
+                "recording/na chotu na no p hath na mare tu.mp3",
+                "recording/bhaichara apna le.mp3",
+                "recording/koi fayada na h.mp3",
+                "recording/tu chakka.mp3",
+                "recording/are.mp3",
+                "recording/tu bhi pakko hi dekhe h.mp3",
+                "recording/time h.mp3",
+                "recording/dekhle phir.mp3",
+                "recording/man ja mna ja.mp3",
+                "recording/phir no.mp3",
+                "recording/kubool karle.mp3",
+                "recording/dekh manni to padegi.mp3",
+                "recording/are man ja bhai.mp3",
+                "recording/hath no p mat mare.mp3",
                     "recording/yes ka button kyu h.mp3",
-                    "recording/koi fayada na h.mp3",
-                    "recording/tu chakka.mp3",
-                    "recording/tu bhi pakko hi dekhe h.mp3",
-                    "recording/time h.mp3",
-                    "recording/man ja mna ja.mp3",
-                    "recording/phir no.mp3",
-                    "recording/kubool karle.mp3",
-                    "recording/dekh manni to padegi.mp3",
-                    "recording/are man ja bhai.mp3",
                 ];          
 
 
 
-                var currentIndex = 0;
+                let currentIndex = 0;
 
                 function playAudio() {
-                    sourceElement.src = audioFiles[currentIndex]; 
-                    
-                    audioElement.load();
-                    audioElement.play();
-                    
-                    currentIndex = (currentIndex + 1) % audioFiles.length;
-                }
+    // Ensure audio is paused before changing source
+    audioElement.pause();
 
+    // Reset playback position
+    audioElement.currentTime = 0;
+
+    // Change source to current audio file
+    sourceElement.src = audioFiles[currentIndex];
+
+    // Load new audio source
+    audioElement.load();
+
+    // Attempt to play (inside a promise catch block to avoid errors)
+    audioElement.play().catch((error) => {
+        console.log("Playback error:", error);
+    });
+
+    // Move to next audio file for next click
+    currentIndex = (currentIndex + 1) % audioFiles.length;
+}
             
             function positionNoButton(initial = false) {
                 const containerRect = buttonsContainer.getBoundingClientRect();
@@ -408,9 +421,9 @@ var sourceElement = document.getElementById("audioSource");
                 lastPosition = bestPosition;
                 
                 noBtn.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                // setTimeout(() => {
-                //     noBtn.style.transition = 'none';
-                // }, 300);
+                setTimeout(() => {
+                    noBtn.style.transition = 'none';
+                }, 300);
             }
             
             function getQuadrant(x, y, width, height) {
