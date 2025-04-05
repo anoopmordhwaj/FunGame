@@ -174,7 +174,7 @@
         <h1>Kya aap gulam hn?</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="playyesAudio()" class="btn">YES</button>
-            <button id="noBtn" onclick="playAudio()" class="btn">NO</button>
+            <button id="noBtn" class="btn">NO</button>
         </div>
 
     </div>
@@ -419,7 +419,6 @@ var sourceElement = document.getElementById("audioSource");
                     ];
                     
 
-                function playAudio() {
                 // Change to next audio file
                 sourceElement.src = audioFiles[currentIndex]; // Set new source
                 
@@ -428,9 +427,7 @@ var sourceElement = document.getElementById("audioSource");
                 audioElement.play();
                 console.log(currentIndex +1 % audioFiles.length)
                 currentIndex = (currentIndex + 1) % audioFiles.length;
-               }
-
-               playAudio()
+               
 
 
 
