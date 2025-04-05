@@ -172,6 +172,7 @@
 <body>
     <div class="container">
         <h1>Kya aap gulam hn?</h1>
+        <h3 id="44" style="display: none;">Aap to gulam ho.</h3 >
         <div class="buttons" preload="auto">
             <button id="yesBtn" onclick="playyesAudio()" class="btn">YES</button>
             <button id="noBtn" class="btn">NO</button>
@@ -236,6 +237,7 @@ var sourceElement = document.getElementById("audioSource");
 
     var yesindex = 0;
     function playyesAudio(){
+        var x = document.getElementById('44');
         sourceElement.src = audioyesFiles[yesindex]; // Set new source
         
         // Reload and play new audio
@@ -243,6 +245,7 @@ var sourceElement = document.getElementById("audioSource");
         audioElement.play();
         
         yesindex = (yesindex + 1) % audioyesFiles.length;
+        x.style.display = 'block';
 
     }
 
