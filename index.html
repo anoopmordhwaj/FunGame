@@ -174,7 +174,7 @@
         <h1>Kya aap gulam hn?</h1>
         <div class="buttons">
             <button id="yesBtn" onclick="playyesAudio()" class="btn">YES</button>
-            <button id="noBtn" class="btn">NO</button>
+            <button id="noBtn"  onclick="playyesAudio()"  class="btn">NO</button>
         </div>
 
     </div>
@@ -389,7 +389,7 @@ var sourceElement = document.getElementById("audioSource");
                 positionNoButton();
             });
             
-            let currentIndex = 0;
+            // let currentIndex = 0;
 
             noBtn.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -398,35 +398,35 @@ var sourceElement = document.getElementById("audioSource");
 
 
 
-                var audioElement = document.getElementById("myAudio");
-                var sourceElement = document.getElementById("audioSource");
-                var audioFiles = [
-                        "recording/na chotu na no p hath na mare tu.mp3",
-                        "recording/hath no p mat mare.mp3",
-                        "recording/are.mp3",
-                        "recording/bhaichara apna le.mp3",
-                        "recording/dekhle phir.mp3",
-                        "recording/yes ka button kyu h.mp3",
-                        "recording/koi fayada na h.mp3",
-                        "recording/tu chakka.mp3",
-                        "recording/tu bhi pakko hi dekhe h.mp3",
-                        "recording/time h.mp3",
-                        "recording/man ja mna ja.mp3",
-                        "recording/phir no.mp3",
-                        "recording/kubool karle.mp3",
-                        "recording/dekh manni to padegi.mp3",
-                        "recording/are man ja bhai.mp3",
-                    ];
+                // var audioElement = document.getElementById("myAudio");
+                // var sourceElement = document.getElementById("audioSource");
+                // var audioFiles = [
+                //         "recording/na chotu na no p hath na mare tu.mp3",
+                //         "recording/hath no p mat mare.mp3",
+                //         "recording/are.mp3",
+                //         "recording/bhaichara apna le.mp3",
+                //         "recording/dekhle phir.mp3",
+                //         "recording/yes ka button kyu h.mp3",
+                //         "recording/koi fayada na h.mp3",
+                //         "recording/tu chakka.mp3",
+                //         "recording/tu bhi pakko hi dekhe h.mp3",
+                //         "recording/time h.mp3",
+                //         "recording/man ja mna ja.mp3",
+                //         "recording/phir no.mp3",
+                //         "recording/kubool karle.mp3",
+                //         "recording/dekh manni to padegi.mp3",
+                //         "recording/are man ja bhai.mp3",
+                //     ];
                     
 
-                // Change to next audio file
-                sourceElement.src = audioFiles[currentIndex]; // Set new source
+                // // Change to next audio file
+                // sourceElement.src = audioFiles[currentIndex]; // Set new source
                 
-                // Reload and play new audio
-                audioElement.load();
-                audioElement.play();
-                console.log(currentIndex +1 % audioFiles.length)
-                currentIndex = (currentIndex + 1) % audioFiles.length;
+                // // Reload and play new audio
+                // audioElement.load();
+                // audioElement.play();
+                // console.log(currentIndex +1 % audioFiles.length)
+                // currentIndex = (currentIndex + 1) % audioFiles.length;
                
 
 
